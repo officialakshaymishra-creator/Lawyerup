@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshay Mishra & Associates | Premium Legal Services Delhi</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0c1a33; /* Deep Midnight Navy */
+            --accent-color: #c5a059;  /* Champagne Gold */
+            --text-dark: #1a1a1a;
+            --text-light: #f8f9fa;
+            --bg-soft: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* --- Consent Popup --- */
+        #consentPopup {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(12, 26, 51, 0.95);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; backdrop-filter: blur(8px);
+        }
+        .popup-content {
+            background: white; padding: 40px; border-radius: 2px;
+            max-width: 600px; text-align: center; border-top: 5px solid var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            padding: 20px 0;
+            transition: all 0.3s;
+            background: rgba(12, 26, 51, 0.98);
+        }
+        .navbar-brand { font-size: 1.5rem; color: var(--accent-color) !important; }
+        .nav-link { 
+            font-weight: 400; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 0.85rem;
+            margin-left: 20px;
+        }
+        .btn-gold {
+            background-color: var(--accent-color);
+            color: white; border: none; padding: 10px 25px;
+            border-radius: 0; transition: 0.3s; font-weight: 600;
+        }
+        .btn-gold:hover { background-color: #b08d48; color: white; transform: translateY(-2px); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(12, 26, 51, 0.8), rgba(12, 26, 51, 0.8)), 
+                        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
+            display: flex; align-items: center; color: white; text-align: center;
+        }
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; font-weight: 300; max-width: 800px; margin: 0 auto 30px; border-left: 3px solid var(--accent-color); padding-left: 20px; }
+
+        /* --- Sections --- */
+        section { padding: 100px 0; }
+        .section-title { margin-bottom: 60px; position: relative; display: inline-block; }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            width: 50px; height: 2px; background: var(--accent-color);
+        }
+
+        /* --- Practice Area Cards --- */
+        .practice-card {
+            padding: 40px; background: white; border: 1px solid #eee;
+            transition: 0.4s; height: 100%; position: relative; overflow: hidden;
+        }
+        .practice-card:hover { 
+            border-color: var(--accent-color); 
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+        .practice-card i { color: var(--accent-color); font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* --- International Section --- */
+        .international-section { background-color: var(--primary-color); color: white; }
+        .international-list li { margin-bottom: 15px; list-style: none; position: relative; }
+        .international-list li i { color: var(--accent-color); margin-right: 10px; }
+
+        /* --- Forms --- */
+        .form-control {
+            border-radius: 0; padding: 15px; border: 1px solid #ddd; margin-bottom: 20px;
+        }
+        .form-control:focus { border-color: var(--accent-color); box-shadow: none; }
+
+        /* --- Footer --- */
+        footer { background: #081122; color: #888; padding: 60px 0; font-size: 0.9rem; }
+        
+        /* --- Animations --- */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s all ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Legal Consent Popup -->
+    <div id="consentPopup">
+        <div class="popup-content">
+            <i class="fas fa-balance-scale fa-3x mb-4" style="color: var(--accent-color);"></i>
+            <h3>Disclaimer & Consent</h3>
+            <p class="text-muted">As per the rules of the Bar Council of India, we are not permitted to solicit work and advertise. By clicking "I Agree", the user acknowledges that the information provided on this website is for informational purposes only and does not constitute a legal advice or attorney-client relationship.</p>
+            <button id="acceptBtn" class="btn btn-gold px-5">I AGREE & PROCEED</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                AKSHAY MISHRA <span style="font-weight:300; font-family:'Montserrat'; font-size: 0.9rem; color: white;">& ASSOCIATES</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#practice">Practice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#international">International</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-gold ms-lg-4" href="#appointment">Book Consultation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="fade-in">
+                <span class="text-uppercase mb-3 d-block" style="letter-spacing: 5px; color: var(--accent-color);">Justice & Integrity</span>
+                <h1>Excellence in Legal Advocacy</h1>
+                <p>Strategic representation across District Courts, High Court, and the Supreme Court of India. Specialized in Civil, Criminal, and Tribunal matters with a commitment to results.</p>
+                <div class="mt-5">
+                    <a href="#appointment" class="btn btn-gold btn-lg me-3">Book Appointment</a>
+                    <a href="#practice" class="btn btn-outline-light btn-lg rounded-0 px-4">Our Expertise</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 mb-4 mb-md-0 fade-in">
+                    <div style="border: 10px solid var(--bg-soft); padding: 20px;">
+                        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80" alt="Advocate" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-7 ps-md-5 fade-in">
+                    <h2 class="section-title">Advocate Akshay Mishra</h2>
+                    <p class="lead">A distinguished legal practitioner based in New Delhi, dedicated to upholding the rule of law with modern legal strategies.</p>
+                    <p>Enrolled with the Bar Council of Delhi, Advocate Akshay Mishra brings years of expertise in navigating complex litigations and arbitrations. We pride ourselves on offering personalized attention to every case, ensuring that justice is not just sought, but served.</p>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            
+                        </div>
+                        <div class="col-6">
+                            <h5 style="color:var(--accent-color)">100+ Cases</h5>
+                            <p class="small text-uppercase">Represented Successfully p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas -->
+    <section id="practice" class="bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">Areas of Practice</h2>
+            <div class="row g-4 mt-2">
+                <div class="col-md-3 fade-in">
+                    <div class="practice-card">
+                        <i class="fas fa-file-signature"></i>
+                        <h5>Contract Drafting</h5>
+                        <p class="small text-muted">Meticulous drafting of commercial agreements and legal instruments.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 fade-in">
+                    <div class="practice-card">
+                        <i class="fas fa-users"></i>
+                        <h5>Family Law</h5>
+                        <p class="small text-muted">Compassionate handling of divorce, custody, and family disputes.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 fade-in">
+                    <div class="practice-card">
+                        <i class="fas fa-gavel"></i>
+                        <h5>Criminal Defence</h5>
+                        <p class="small text-muted">Robust defence strategy across all court levels and tribunals.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 fade-in">
+                    <div class="practice-card">
+                        <i class="fas fa-building"></i>
+                        <h5>Civil Litigation</h5>
+                        <p class="small text-muted"> Civil , NI ACT, Property disputes, recovery suits, and constitutional matters.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Section -->
+    <section id="international" class="international-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 fade-in">
+                    <h2 class="section-title text-white">Global Collaboration</h2>
+                    <p class="mb-4">We act as a bridge for international clients and law firms navigating the Indian legal system. Our firm provides specialized assistance for expatriates and global investors.</p>
+                    <ul class="international-list p-0">
+                        <li><i class="fas fa-check-circle"></i> Cross-border dispute resolution ,Criminal & civil </li>
+                        <li><i class="fas fa-check-circle"></i> International Arbitration & Family Law</li>
+                        <li><i class="fas fa-check-circle"></i> Visa & Immigration legal consultancy</li>
+                        <li><i class="fas fa-check-circle"></i> 24/7 Virtual consultations for global timezones</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-center fade-in">
+                    <div class="p-5" style="border: 1px dashed var(--accent-color);">
+                        <i class="fas fa-globe-americas fa-5x mb-4 text-white"></i>
+                        <h4 class="text-white">Seeking a Partner in India?</h4>
+                        <p class="text-muted">We collaborate with global firms for seamless representation.</p>
+                        <a href="#contact" class="btn btn-gold mt-3">Initial Inquiry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment & Contact -->
+    <section id="appointment">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 fade-in">
+                    <h2 class="section-title">Contact</h2>
+                    <div class="mb-4">
+                        <p class="mb-1 text-muted text-uppercase small">Chamber Address</p>
+                        <p><strong>LAWYERS CHAMBER DWARKA COURT COMPLEX, NEW DELHI 110075</strong></p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mb-1 text-muted text-uppercase small">Direct Line</p>
+                        <p><strong>+91 9999002539</strong></p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mb-1 text-muted text-uppercase small">Email</p>
+                        <p><strong>officialakshaymishra@gmail.com</strong></p>
+                    </div>
+                </div>
+                <div class="col-lg-8 fade-in">
+                    <div class="card border-0 shadow-sm p-4 p-md-5">
+                        <h3 class="mb-4">Request a Consultation</h3>
+                        <form action="mailto:officialakshaymishra@gmail.com" method="post" enctype="text/plain">
+                            <div class="row">
+                                <div class="col-md-6"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div>
+                                <div class="col-md-6"><input type="email" name="email" class="form-control" placeholder="Email Address" required></div>
+                                <div class="col-md-6"><input type="tel" name="phone" class="form-control" placeholder="Phone Number" required></div>
+                                <div class="col-md-6"><input type="date" name="date" class="form-control" required></div>
+                                <div class="col-12">
+                                    <select name="service" class="form-control" required>
+                                        <option value="">Select Service Area</option>
+                                        <option value="criminal">Criminal Law</option>
+                                        <option value="civil">Civil Law</option>
+                                        <option value="family">Family Law</option>
+                                        <option value="international">International Collaboration</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Brief Overview of your Case" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-gold btn-lg w-100">Schedule Appointment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <a class="navbar-brand mb-4 d-block" href="#" style="color: var(--accent-color) !important;">AKSHAY MISHRA & ASSOCIATES</a>
+            <p>&copy; 2024. All Rights Reserved. Designed for Professional Excellence.</p>
+            <p style="font-size: 0.75rem; max-width: 800px; margin: 20px auto;">Disclaimer: The contents of this website are for informational purposes only. No part of this website should be construed as legal advice or as creating an attorney-client relationship.</p>
+            <div class="mt-4">
+                <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Consent Logic
+        document.getElementById('acceptBtn').addEventListener('click', function() {
+            document.getElementById('consentPopup').style.display = 'none';
+            localStorage.setItem('lawfirm_consent', 'true');
+        });
+
+        if (localStorage.getItem('lawfirm_consent')) {
+            document.getElementById('consentPopup').style.display = 'none';
+        }
+
+        // Animation Observer
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').style.padding = '10px 0';
+                document.querySelector('.navbar').style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                document.querySelector('.navbar').style.padding = '20px 0';
+            }
+        });
+    </script>
+</body>
+</html>
+index.html
+Displaying index.html.
